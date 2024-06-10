@@ -1,0 +1,474 @@
+\documentclass[aspectratio=169, hideothersubsections]{beamer}
+%\documentclass{beamer}
+%\documentclass[aspectratio=1610]{beamer}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetheme{Berkeley}
+\usefonttheme{structuresmallcapsserif}
+\usecolortheme{owl}
+%\usepackage{xcolor}
+%\usepackage{darkmode}
+%\enabledarkmode
+%\usecolortheme{albatross}
+%\usecolortheme{spruce}
+\usepackage{minted}
+\usepackage{comment}
+\usepackage{animate}  
+
+
+\setbeamertemplate{page number in head/foot}[totalframenumber]
+\setbeamertemplate{navigation symbols}{\footnotesize\usebeamertemplate{page number in head/foot}}
+\setbeamercolor{title}{fg = OwlRed}
+\setbeamercolor{author}{fg = OwlBlue}
+%\setbeamercolor{frametitle}{fg=white}
+%\setbeamercolor{background canvas}{bg=black}
+%\setbeamercolor{normal text}{fg=white}
+
+%--------------------------------------
+%REPLACE IMAGE.JPG WITH LOGO OF ORGANISATION
+\logo{\begin{tikzpicture}
+\node[inner sep=0pt] at (0,0) {\includegraphics[height=1cm]{SODS Logo.png}};
+\end{tikzpicture}}
+%--------------------------------------
+
+\title{BSDS-202 : Advanced Python}
+\subtitle{Course Instructor - Mr. Nitish Patil}
+\author[Gauri Sharan]{Gauri Sharan - BSc Data Science, Semester 4}
+\date{June 11, 2024}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Table of contents}
+    \tableofcontents[hideallsubsections]
+\end{frame}
+
+% Unit 1
+\section{OOP}
+
+\subsection{Understanding the importance of Object-oriented programming (OOP) concepts}
+\begin{frame}
+\frametitle{Object-oriented Programming (OOP) Concepts}
+OOP is a programming paradigm based on the concept of "objects", which can contain data and code to manipulate that data. Key concepts include:
+\begin{itemize}
+    \item \textbf{Class}: A blueprint for creating objects.
+    \item \textbf{Objects}: Instances of classes.
+    \item \textbf{Inheritance}: Mechanism by which one class can inherit attributes and methods from another class.
+    \item \textbf{Encapsulation}: Hiding the internal state of an object and requiring all interaction to be performed through an object's methods.
+    \item \textbf{Polymorphism}: The ability to present the same interface for different underlying data types.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Python code example: Class and Objects}
+\rule{\textwidth}{1pt}
+\scriptsize
+\begin{minted}{python}
+class Dog:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def bark(self):
+        return f"{self.name} is barking."
+
+my_dog = Dog("Buddy", 3)
+print(my_dog.bark())
+\end{minted}
+\rule{\textwidth}{1pt}
+\end{frame}
+
+\subsection{Advanced Python syntax and concepts}
+\begin{frame}
+\frametitle{Advanced Python Syntax and Concepts}
+Advanced features of Python include:
+\begin{itemize}
+    \item \textbf{Iterators}: Objects that can be iterated upon.
+    \item \textbf{Generators}: Functions that return an iterable set of items, one at a time, in a special way.
+    \item \textbf{Decorators}: Functions that modify the behavior of another function.
+    \item \textbf{Context Managers}: Allow you to allocate and release resources precisely when you want to.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Python code example: Generators}
+\rule{\textwidth}{1pt}
+\scriptsize
+\begin{minted}{python}
+def countdown(n):
+    while n > 0:
+        yield n
+        n -= 1
+
+for count in countdown(5):
+    print(count)
+\end{minted}
+\rule{\textwidth}{1pt}
+\end{frame}
+
+\subsection{Functions \& Recursive Function}
+\begin{frame}[fragile]
+\frametitle{Functions \& Recursive Function}
+Functions are blocks of code that only run when called. Recursive functions are functions that call themselves.
+\rule{\textwidth}{1pt}
+\scriptsize
+\begin{minted}{python}
+def factorial(n):
+    if n == 1:
+        return 1
+    else:
+        return n * factorial(n-1)
+
+print(factorial(5))
+\end{minted}
+\rule{\textwidth}{1pt}
+\end{frame}
+
+% Unit 2
+\section{Web Scraping}
+
+\subsection{Understanding the web scraping libraries and functionalities}
+\begin{frame}
+\frametitle{Web Scraping Libraries and Functionalities}
+Web scraping involves fetching and extracting data from websites. Python libraries used for web scraping include:
+\begin{itemize}
+    \item \textbf{Beautiful Soup}: Parses HTML and XML documents.
+    \item \textbf{Requests}: Sends HTTP requests.
+    \item \textbf{Scrapy}: An open-source web-crawling framework.
+\end{itemize}
+\end{frame}
+
+\subsection{Web Scraping with Beautiful Soup}
+\begin{frame}[fragile]{Python code example: Web Scraping with Beautiful Soup}
+\rule{\textwidth}{1pt}
+\scriptsize
+\begin{minted}{python}
+import requests
+from bs4 import BeautifulSoup
+
+url = 'https://example.com'
+response = requests.get(url)
+soup = BeautifulSoup(response.text, 'html.parser')
+
+for heading in soup.find_all('h2'):
+    print(heading.text)
+\end{minted}
+\rule{\textwidth}{1pt}
+\end{frame}
+
+% Unit 3
+\section{API Creation}
+
+\subsection{Overview of Python web frameworks such as Flask}
+\begin{frame}
+\frametitle{Overview of Python Web Frameworks}
+Python web frameworks like Flask and Django help in building web applications quickly and efficiently. Flask is a lightweight WSGI web application framework.
+\end{frame}
+
+\subsection{Design and implement API using Python web frameworks}
+\begin{frame}[fragile]{Python code example: Creating API with Flask}
+\rule{\textwidth}{1pt}
+\scriptsize
+\begin{minted}{python}
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route('/api', methods=['GET'])
+def api():
+    return jsonify({"message": "Hello, World!"})
+
+if __name__ == '__main__':
+    app.run(debug=True)
+\end{minted}
+\rule{\textwidth}{1pt}
+\end{frame}
+
+\subsection{Creating RESTful Web APIs using Flask and Python}
+\begin{frame}
+\frametitle{Creating RESTful Web APIs}
+RESTful APIs are based on representational state transfer (REST) technology, an architectural style and approach to communications often used in web services development.
+\end{frame}
+
+\subsection{Install Streamlit, Display text with Streamlit}
+\begin{frame}[fragile]{Python code example: Display Text with Streamlit}
+\rule{\textwidth}{1pt}
+\scriptsize
+\begin{minted}{python}
+import streamlit as st
+
+st.write("Hello, Streamlit!")
+\end{minted}
+\rule{\textwidth}{1pt}
+\end{frame}
+
+\subsection{Display image, audio, video file with Streamlit}
+\begin{frame}[fragile]{Python code example: Display Image with Streamlit}
+\rule{\textwidth}{1pt}
+\scriptsize
+\begin{minted}{python}
+import streamlit as st
+
+st.image("path/to/image.jpg", caption="Sample Image")
+\end{minted}
+\rule{\textwidth}{1pt}
+\end{frame}
+
+% Unit 4
+\section{Tensorflow \& Keras}
+
+\subsection{Tensorflow basics, Tensorflow perceptron, ANN Tensorflow}
+\begin{frame}
+\frametitle{Tensorflow Basics}
+TensorFlow is an open-source framework for machine learning and deep learning. Key concepts include:
+\begin{itemize}
+    \item \textbf{Tensors}: Multi-dimensional arrays.
+    \item \textbf{Graphs}: Define the computation.
+    \item \textbf{Sessions}: Execute the graph.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Python code example: TensorFlow Basics}
+\rule{\textwidth}{1pt}
+\scriptsize
+\begin{minted}{python}
+import tensorflow as tf
+
+a = tf.constant(2)
+b = tf.constant(3)
+
+with tf.Session() as sess:
+    print(sess.run(a + b))
+\end{minted}
+\rule{\textwidth}{1pt}
+\end{frame}
+
+\subsection{Linear Regression}
+\begin{frame}[fragile]{Python code example: Linear Regression with TensorFlow}
+\rule{\textwidth}{1pt}
+\scriptsize
+\begin{minted}{python}
+import tensorflow as tf
+
+# Define the model
+class LinearModel:
+    def __init__(self):
+        self.W = tf.Variable(tf.random.normal([1]), name='weight')
+        self.b = tf.Variable(tf.random.normal([1]), name='bias')
+
+    def __call__(self, x):
+        return self.W * x + self.b
+
+# Create the model
+model = LinearModel()
+# Define a loss function
+def loss(predicted_y, target_y):
+    return tf.reduce_mean(tf.square(predicted_y - target_y))
+#continued in next slide
+\end{minted}
+\rule{\textwidth}{1pt}
+\end{frame}
+
+\begin{frame}[fragile]{Python code example: Linear Regression with TensorFlow}
+\rule{\textwidth}{1pt}
+\scriptsize
+\begin{minted}{python}
+# Training data
+x_train = [1, 2, 3, 4]
+y_train = [0, -1, -2, -3]
+
+# Define a training loop
+def train(model, x, y, learning_rate):
+    with tf.GradientTape() as t:
+        current_loss = loss(model(x), y)
+    dW, db = t.gradient(current_loss, [model.W, model.b])
+    model.W.assign_sub(learning_rate * dW)
+    model.b.assign_sub(learning_rate * db)
+
+# Training the model
+epochs = 100
+for epoch in range(epochs):
+    train(model, x_train, y_train, learning_rate=0.1)
+    current_loss = loss(model(x_train), y_train)
+    print(f"Epoch {epoch}: Loss: {current_loss.numpy()}")
+\end{minted}
+\rule{\textwidth}{1pt}
+\end{frame}
+
+\subsection{Keras Modules, Layers, Customized Layers}
+\begin{frame}[fragile]{Python code example: Keras Layers}
+\rule{\textwidth}{1pt}
+\scriptsize
+\begin{minted}{python}
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+
+model = Sequential([
+    Dense(32, activation='relu', input_shape=(784,)),
+    Dense(64, activation='relu'),
+    Dense(10, activation='softmax')
+])
+
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+\end{minted}
+\rule{\textwidth}{1pt}
+\end{frame}
+
+\subsection{Tensorflow \& Keras applications}
+\begin{frame}
+\frametitle{TensorFlow \& Keras Applications}
+Applications of TensorFlow and Keras include image recognition, natural language processing, and predictive analytics.
+\end{frame}
+
+\subsection{Projects: MNIST data set, Linear Regression}
+\begin{frame}[fragile]{Python code example: MNIST with Keras}
+\rule{\textwidth}{1pt}
+\scriptsize
+\begin{minted}{python}
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Flatten
+from tensorflow.keras.utils import to_categorical
+
+# Load dataset
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+# Preprocess the data
+x_train = x_train.reshape((60000, 28 * 28)).astype('float32') / 255
+x_test = x_test.reshape((10000, 28 * 28)).astype('float32') / 255
+y_train = to_categorical(y_train)
+y_test = to_categorical(y_test)
+
+# Build the model
+model = Sequential([
+    Flatten(input_shape=(28*28,)),
+    Dense(512, activation='relu'),
+    Dense(10, activation='softmax')
+])
+\end{minted}
+\rule{\textwidth}{1pt}
+\end{frame}
+
+\begin{frame}[fragile]{Python code example: MNIST with Keras}
+\rule{\textwidth}{1pt}
+\scriptsize
+\begin{minted}{python}
+# Compile the model
+model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'])
+
+# Train the model
+model.fit(x_train, y_train, epochs=5, batch_size=128)
+
+# Evaluate the model
+test_loss, test_acc = model.evaluate(x_test, y_test)
+print('Test accuracy:', test_acc)
+\end{minted}
+\rule{\textwidth}{1pt}
+\end{frame}
+
+% Unit 5
+\section{Pytorch}
+
+\subsection{Pytorch Basics, Terminologies, Loading Data}
+\begin{frame}
+\frametitle{PyTorch Basics}
+PyTorch is an open-source machine learning library based on the Torch library. Key concepts include tensors, automatic differentiation, and dynamic computation graphs.
+\end{frame}
+
+\subsection{Linear Regression, Implementing Neural Network}
+\begin{frame}[fragile]{Python code example: Linear Regression with PyTorch}
+\rule{\textwidth}{1pt}
+\scriptsize
+\begin{minted}{python}
+import torch
+import torch.nn as nn
+import torch.optim as optim
+
+# Data
+x_train = torch.tensor([[1.0], [2.0], [3.0], [4.0]])
+y_train = torch.tensor([[0.0], [-1.0], [-2.0], [-3.0]])
+
+# Model
+class LinearModel(nn.Module):
+    def __init__(self):
+        super(LinearModel, self).__init__()
+        self.linear = nn.Linear(1, 1)
+
+    def forward(self, x):
+        return self.linear(x)
+
+model = LinearModel()
+\end{minted}
+\rule{\textwidth}{1pt}
+\end{frame}
+
+\begin{frame}[fragile]{Python code example: Linear Regression with PyTorch}
+\rule{\textwidth}{1pt}
+\scriptsize
+\begin{minted}{python}
+# Loss and optimizer
+criterion = nn.MSELoss()
+optimizer = optim.SGD(model.parameters(), lr=0.01)
+
+# Training loop
+for epoch in range(100):
+    model.train()
+    optimizer.zero_grad()
+    outputs = model(x_train)
+    loss = criterion(outputs, y_train)
+    loss.backward()
+    optimizer.step()
+
+    print(f'Epoch [{epoch+1}/100], Loss: {loss.item():.4f}')
+\end{minted}
+\rule{\textwidth}{1pt}
+\end{frame}
+
+\subsection{Pytorch Applications}
+\begin{frame}
+\frametitle{PyTorch Applications}
+PyTorch is used in various applications, including -
+\begin{itemize}
+    \item Computer vision
+    \item Natural language processing
+    \item Reinforcement learning
+\end{itemize}
+\end{frame}
+
+\section{References}
+\begin{frame}{References}
+  \begin{thebibliography}{10}
+    \beamertemplatebookbibitems
+    \bibitem{ramalho} Luciano Ramalho. \textit{Fluent Python}. O'Reilly Media, 2015.
+    \beamertemplatebookbibitems
+    \bibitem{beazley} David Beazley and Brian K. Jones. \textit{Python Cookbook}. O'Reilly Media, 2013.
+    \beamertemplatebookbibitems
+    \bibitem{mckinney} Wes McKinney. \textit{Python for Data Analysis}. O'Reilly Media, 2017.
+    \beamertemplatebookbibitems
+    \bibitem{raschka} Sebastian Raschka and Vahid Mirjalili. \textit{Python Machine Learning}. Packt Publishing, 2019.
+    \beamertemplatebookbibitems
+    \bibitem{python_docs} \textit{Python Documentation}. Available at: \url{https://docs.python.org/3/}
+    \beamertemplatebookbibitems
+    \bibitem{w3schools} \textit{Python Programming Tutorials}. Available at: \url{https://www.w3schools.com/python/}
+    \beamertemplatebookbibitems
+    \bibitem{realpython} \textit{Real Python}. Available at: \url{https://realpython.com/}
+    \beamertemplatebookbibitems
+    \bibitem{pythonweekly} \textit{Python Weekly}. Available at: \url{https://www.pythonweekly.com/}
+  \end{thebibliography}
+\end{frame}
+
+\section{Thank You}
+\begin{frame}{Thank You}
+Hope you liked this presentation. \newline \newline
+\alert{Gauri Sharan} \newline
+Student, School of Data Science \newline
+AAFT Noida (Shobhit University) \newline
+BSc Data Science 2022-25 \newline
+Semester 4, 2024 \newline
+\begin{itemize}
+    \item LinkedIn: \href{https://www.linkedin.com/in/gauri-sharan}{\bf linkedin.com/in/gauri-sharan} 
+    \item GitHub: \href{https://github.com/gaurisharan}{\bf github.com/gaurisharan}
+    \item Mail: \href{mailto:gaurisharan123@gmail.com}{\bf gaurisharan123@gmail.com}
+\end{itemize}
+\end{frame}
+
+\end{document}
